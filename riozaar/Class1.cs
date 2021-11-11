@@ -44,6 +44,22 @@ namespace riozaar
             email = e;
             address = ad;
         }
+        public string getname()
+        {
+            return name;
+        }
+        public string getphone()
+        {
+            return phone;
+        }
+        public string getemail()
+        {
+            return email;
+        }
+        public string getaddress()
+        {
+            return address;
+        }
         public async void retrievedata(string em)
         {
             try
@@ -73,7 +89,7 @@ namespace riozaar
                 }
                 
             }
-            MessageBox.Show(email +" "+ name+" " + phone+" " + address);
+            MessageBox.Show("Data found!");
         }
         public async void delete(string em)
         {

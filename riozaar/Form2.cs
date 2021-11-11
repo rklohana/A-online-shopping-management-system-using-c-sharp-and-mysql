@@ -25,7 +25,13 @@ namespace riozaar
         private void button1_Click(object sender, EventArgs e)
         {
             customer c = new customer();
-            c.retrievedata(textBox1.Text);
+            c.delete(textBox1.Text);
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
