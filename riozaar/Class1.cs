@@ -25,11 +25,11 @@ namespace riozaar
         {   
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "riozaar.mysql.database.azure.com",
-                Database = "riozaar_data",
-                UserID = "ruhal@riozaar",
-                Password = "Iamrklohana123",
-                SslMode = MySqlSslMode.Required,
+                Server = "sql6.freesqldatabase.com",
+                Database = "sql6456591",
+                UserID = "sql6456591",
+                Password = "eVlfl8pexq",
+               // SslMode = MySqlSslMode.Required,
             };
 
             conn = new MySqlConnection(builder.ConnectionString);
@@ -128,13 +128,17 @@ namespace riozaar
             int rowCount;
             using (var command = conn.CreateCommand())
             {
-                command.CommandText = @"INSERT INTO customer (email,fName, Phone,Address) VALUES (@email, @name,@phone,@address);";
+                command.CommandText = @"INSERT INTO CUSTOMER (email,fName, Phone,Address,password) VALUES (@email, @name,@phone,@address,@pass);";
                 command.Parameters.AddWithValue("@email", email);
                 command.Parameters.AddWithValue("@name", name);
                 command.Parameters.AddWithValue("@phone", phone);
-
+                command.Parameters.AddWithValue("@pass", pass);
                 command.Parameters.AddWithValue("@address", address);
                 rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Inserted");
+                }
             }
             
         }
