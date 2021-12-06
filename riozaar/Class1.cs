@@ -14,7 +14,7 @@ namespace riozaar
         string phone;
         string email;
         string address;
-        password pass;
+        string pass;
         
         public customer()
         {
@@ -23,7 +23,6 @@ namespace riozaar
         MySqlConnection conn;
         async void connect()
         {   
-            pass = new password();
             var builder = new MySqlConnectionStringBuilder
             {
                 Server = "riozaar.mysql.database.azure.com",
@@ -40,7 +39,7 @@ namespace riozaar
         {
             name = n;
             phone = no;
-            pass.currpass = p;
+            pass = p;
             email = e;
             address = ad;
         }
@@ -59,6 +58,11 @@ namespace riozaar
         public string getaddress()
         {
             return address;
+        }
+
+        public string getpass()
+        {
+            return pass;
         }
         public async void retrievedata(string em)
         {
@@ -153,15 +157,5 @@ namespace riozaar
 
         }
     }
-    class password
-    {
-       
-       public string oldpass;
-       public string currpass;
-       public DateTime last;
-
-       
-    }
-
 
 }
