@@ -9,35 +9,37 @@ namespace riozaar
     class bazaar
     {
         string id;
-        string name;
-        string phone;
-        string location;
-
-        public void setdata(string did, string n, string pho, string mid, string loc)
+        string st;
+        string ed;
+        int shops;
+        List<string> location;
+        
+        public void setdata(string did, string st_time, string ed_time, int n,List<string> locs)
         {
             id = did;
-            name = n;
-            phone = pho;
-           
-            location = loc;
+            st = st_time;
+            ed = ed_time;
+            location = new List<string>(locs);
+            shops = n;
+            
         }
-        public string getname()
+        public string getst()
         {
-            return name;
+            return st;
         }
         public string getdid()
         {
             return id;
         }
-        public string getphone()
+        public string geted()
         {
-            return phone;
+            return ed;
         }
-        public string getmanagerid()
+        public int getshops()
         {
-            return managerId;
+            return shops;
         }
-        public string getlocation()
+        public List<string> getlocation()
         {
             return location;
         }

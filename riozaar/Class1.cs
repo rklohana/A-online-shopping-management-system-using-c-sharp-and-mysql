@@ -21,7 +21,7 @@ namespace riozaar
             connect();
         }
         MySqlConnection conn;
-        async void connect()
+         void connect()
         {   
             var builder = new MySqlConnectionStringBuilder
             {
@@ -136,23 +136,10 @@ namespace riozaar
                 command.Parameters.AddWithValue("@address", address);
                 rowCount = await command.ExecuteNonQueryAsync();
             }
-            using (var command1 = conn.CreateCommand())
-            {
-                command1.CommandText = @"INSERT INTO password (pass,oldpassword, LastChanged,Customer_email) VALUES (@pass, @last,@l_d,@email);";
-                command1.Parameters.AddWithValue("@pass", pass.currpass);
-                command1.Parameters.AddWithValue("@last", pass.oldpass);
-                command1.Parameters.AddWithValue("@l_d", pass.last);
-                command1.Parameters.AddWithValue("@email", email);
-                int rowCount1 = await command1.ExecuteNonQueryAsync();
-
-                if (rowCount > 0 && rowCount1 > 0)
-                {
-                    MessageBox.Show("Inserted");
-                }
-            }
+            
         }
 
-        public async void update()
+        public void update()
         {
 
         }
