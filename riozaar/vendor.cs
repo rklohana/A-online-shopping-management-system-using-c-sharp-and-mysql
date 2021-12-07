@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySqlConnector;
+using System.Data.SqlClient;
 namespace riozaar
 {
     class vendor
@@ -112,7 +114,7 @@ namespace riozaar
                     id = Reader.GetString(0);
                     name = Reader.GetString(1);
                     phone = Reader.GetString(2);
-                    bazID = Reader.GetString(3)
+                    bazID = Reader.GetString(3);
                     password = Reader.GetString(4);
                     
                 }

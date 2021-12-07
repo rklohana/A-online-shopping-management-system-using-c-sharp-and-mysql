@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Forms;
+using MySqlConnector;
+using System.Data.SqlClient;
 namespace riozaar
 {
     class bazaar
@@ -86,8 +88,8 @@ namespace riozaar
                 {
                     id = Reader.GetString(0);
                     st = Reader.GetString(1);
-                    et = Reader.GetString(2);
-                    shops = Reader.GetString(3);
+                    ed = Reader.GetString(2);
+                    shops = Reader.GetInt32(3);
                 }
 
 
@@ -129,9 +131,9 @@ namespace riozaar
             {
                 command.CommandText = @"INSERT INTO BAZAAR (BazaarID,Start_Time,End_Time,NoOfShops) VALUES (@BazaarID,@Start_Time,@End_Time,@NoOfShops);";
                 command.Parameters.AddWithValue("@BazaarID", id);
-                command.Parameters.AddWithValue("@Start_Time", name);
-                command.Parameters.AddWithValue("@End_Time", managerId);
-                command.Parameters.AddWithValue("@NoOfShops", password);
+                command.Parameters.AddWithValue("@Start_Time",st);
+                command.Parameters.AddWithValue("@End_Time", ed);
+                command.Parameters.AddWithValue("@NoOfShops", shops);
                 rowCount = await command.ExecuteNonQueryAsync();
                 if (rowCount > 0)
                 {
