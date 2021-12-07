@@ -11,8 +11,8 @@ namespace riozaar
     class order
     {
         string id;
-        string name;
-        string phone;
+        string orddate;
+        float totalamount;
         string custId;
         string vid;
         List<string> pid;
@@ -89,8 +89,8 @@ namespace riozaar
 
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"select VendorID,VFName,phone,BAZAAR_BazaarID,password from VENDOR where VendorID=@VendorID;";
-            command.Parameters.AddWithValue("@VendorID", id);
+            command.CommandText = @"select orderID,ODate,totalAmount,CUSTOMER_email from ORDERS where orderID=@orderID;";
+            command.Parameters.AddWithValue("@orderID", id);
             row = await command.ExecuteNonQueryAsync();
             using (MySqlDataReader Reader = command.ExecuteReader())
             {
@@ -99,7 +99,7 @@ namespace riozaar
                     id = Reader.GetString(0);
                     name = Reader.GetString(1);
                     phone = Reader.GetString(2);
-                    bazID = Reader.GetString(3);
+                     = Reader.GetString(3);
                     password = Reader.GetString(4);
 
                 }

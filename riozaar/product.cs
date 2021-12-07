@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 using MySqlConnector;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
+using System.Drawing;
+using System.IO;
+
 namespace riozaar
 {
     class product
     {
         string id;
         string name;
-        string image;
+        string images;
         string description;
         string vendorid;
+        float price;
         public product()
         {
             connect();
@@ -34,13 +39,14 @@ namespace riozaar
             conn = new MySqlConnection(builder.ConnectionString);
 
         }
-        public void setdata(string pid,string n, string im, string des,string vid)
+        public void setdata(string pid,string n, string im, string des,string vid,float pr)
         {
             id = pid;
             name = n;
-            image = im;
+            images = im;
             description = des;
             vendorid = vid;
+            price = pr;
         }
         public string getname()
         {
@@ -52,7 +58,7 @@ namespace riozaar
         }
         public string getimage()
         {
-            return image;
+            return images;
         }
         public string getdescription()
         {
@@ -61,6 +67,10 @@ namespace riozaar
         public string getvid()
         {
             return vendorid;
+        }
+        public float getprice()
+        {
+            return price;
         }
         public string photoconvert(Bitmap i)
         {
@@ -74,7 +84,7 @@ namespace riozaar
         public Image photoback(string i)
         {
             byte[] b = Convert.FromBase64String(i);
-            MemoryStream m = new MemoryStream();
+            MemoryStream m = new System.IO.MemoryStream();
             m.Write(b, 0, Convert.ToInt32(b.Length));
             Bitmap bm = new Bitmap(m, false);
             m.Dispose();
@@ -95,7 +105,7 @@ namespace riozaar
 
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"select productID,Pname,Image,Description from PRODUCT where productID=@productID;";
+            command.CommandText = @"select productID,Pname,Image,Description,price from PRODUCT where productID=@productID;";
             command.Parameters.AddWithValue("@productID", pid);
             row = await command.ExecuteNonQueryAsync();
             using (MySqlDataReader Reader = command.ExecuteReader())
@@ -104,8 +114,9 @@ namespace riozaar
                 {
                     id = Reader.GetString(0);
                     name = Reader.GetString(1);
-                    image = Reader.GetString(2);
+                    images = Reader.GetString(2);
                     description = Reader.GetString(3);
+                    price = Reader.GetFloat(4);
                 }
                 
 
@@ -145,11 +156,12 @@ namespace riozaar
             int rowCount;
             using (var command = conn.CreateCommand())
             {
-                command.CommandText = @"INSERT INTO PRODUCT (productID,Pname,Image,Description) VALUES (@proudctID, @Pname,@Image,@Description);";
+                command.CommandText = @"INSERT INTO PRODUCT (productID,Pname,Image,Description,price) VALUES (@proudctID, @Pname,@Image,@Description,@price);";
                 command.Parameters.AddWithValue("@productID", id);
                 command.Parameters.AddWithValue("@Pname", name);
-                command.Parameters.AddWithValue("@Image", image);
+                command.Parameters.AddWithValue("@Image", images);
                 command.Parameters.AddWithValue("@Description", description);
+                command.Parameters.AddWithValue("@price", price);
                 rowCount = await command.ExecuteNonQueryAsync();
                 if (rowCount > 0)
                 {
