@@ -79,7 +79,7 @@ namespace riozaar
             
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"select email,fname,phone,address from customer where email=@email;";
+            command.CommandText = @"select email,fname,phone,address from CUSTOMER where email=@email;";
             command.Parameters.AddWithValue("@email", em);
             row = await command.ExecuteNonQueryAsync();
             using (MySqlDataReader Reader = command.ExecuteReader())
@@ -109,7 +109,7 @@ namespace riozaar
             //conn.Open();
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"delete from customer where email=@email;";
+            command.CommandText = @"delete from CUSTOMER where email=@email;";
             command.Parameters.AddWithValue("@email", em);
             row = await command.ExecuteNonQueryAsync();
             MessageBox.Show("Data Deleted");
