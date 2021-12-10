@@ -20,6 +20,7 @@ namespace riozaar
         string description;
         string vendorid;
         float price;
+        int qt;
         public product()
         {
             connect();
@@ -39,7 +40,7 @@ namespace riozaar
             conn = new MySqlConnection(builder.ConnectionString);
 
         }
-        public void setdata(string pid,string n, string im, string des,string vid,float pr)
+        public void setdata(string pid,string n, string im, string des,string vid,float pr,int q)
         {
             id = pid;
             name = n;
@@ -47,6 +48,7 @@ namespace riozaar
             description = des;
             vendorid = vid;
             price = pr;
+            qt = q;
         }
         public string getname()
         {
@@ -155,8 +157,8 @@ namespace riozaar
             }
             int rowCount;
             using (var command = conn.CreateCommand())
-            {
-                command.CommandText = @"INSERT INTO PRODUCT (productID,Pname,Image,Description,price) VALUES (@proudctID, @Pname,@Image,@Description,@price);";
+            {   
+                command.CommandText = @"INSERT INTO PRODUCT (productID,Pname,Image,Description,price) VALUES (@productID, @Pname,@Image,@Description,@price);";
                 command.Parameters.AddWithValue("@productID", id);
                 command.Parameters.AddWithValue("@Pname", name);
                 command.Parameters.AddWithValue("@Image", images);
@@ -166,6 +168,33 @@ namespace riozaar
                 if (rowCount > 0)
                 {
                     MessageBox.Show("Inserted");
+                }
+            }
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"INSERT INTO sold_by (PRODUCT_productID,stock,VENDOR_VendorID) VALUES (@p,@s,@v);";
+                command.Parameters.AddWithValue("@p", id);
+                command.Parameters.AddWithValue("@s", qt);
+                command.Parameters.AddWithValue("@v", vendorid);
+                try
+                {
+                    rowCount = await command.ExecuteNonQueryAsync();
+                    if (rowCount > 0)
+                    {
+                        MessageBox.Show("Inserted");
+                    }
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+                try
+                {
+                    await conn.CloseAsync();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
                 }
             }
 

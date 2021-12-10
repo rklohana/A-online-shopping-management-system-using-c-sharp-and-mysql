@@ -12,6 +12,8 @@ namespace riozaar
 {
     public partial class producttemplate : UserControl
     {
+        Image ir;
+        Bitmap b;
         public producttemplate()
         {
             InitializeComponent();
@@ -24,9 +26,17 @@ namespace riozaar
             on.Filter = "Image (jpg,jpeg,png) | *.jpg;*.jpeg;*.png|all files|*.*";
             if (on.ShowDialog() == DialogResult.OK)
             {
-                Image ir = new Bitmap(on.FileName);
+                b = new Bitmap(on.FileName);
+                 ir = new Bitmap(on.FileName);
                 pictureBox1.Image = ir.GetThumbnailImage(128, 130, null, new IntPtr());
             }
+        }
+
+        private void bunifuThinButton21_Click(object sender, EventArgs e)
+        {
+            product p = new product();
+            p.setdata("1", textBox1.Text, p.photoconvert(b), textBox2.Text, "1", float.Parse(textBox5.Text),decimal.ToInt32( numericUpDown1.Value));
+            p.add();
         }
     }
 }

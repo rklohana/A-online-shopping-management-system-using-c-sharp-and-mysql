@@ -8,6 +8,7 @@ using MySqlConnector;
 using System.Data.SqlClient;
 namespace riozaar
 {
+    /*
     class shipment
     {
         string id;
@@ -156,4 +157,5 @@ namespace riozaar
 
         }
     }
+    */
 }

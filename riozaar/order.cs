@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using MySqlConnector;
 using System.Data.SqlClient;
 namespace riozaar
-{
+{ /*
     struct det{
         string pid;
         string vid;
@@ -167,4 +167,5 @@ namespace riozaar
         }
 
     }
+    */
 }
