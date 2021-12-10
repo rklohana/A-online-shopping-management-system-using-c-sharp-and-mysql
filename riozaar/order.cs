@@ -8,6 +8,11 @@ using MySqlConnector;
 using System.Data.SqlClient;
 namespace riozaar
 {
+    struct det{
+        string pid;
+        string vid;
+    }
+
     class order
     {
         string id;
@@ -15,7 +20,7 @@ namespace riozaar
         float totalamount;
         string custId;
         string vid;
-        List<string> pid;
+        List<det> d;
         string location;
         MySqlConnection conn;
         void connect()
