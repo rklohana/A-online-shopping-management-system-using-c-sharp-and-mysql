@@ -99,7 +99,7 @@ namespace riozaar
                     id = Reader.GetString(0);
                     name = Reader.GetString(1);
                     phone = Reader.GetString(2);
-                     = Reader.GetString(3);
+                     //= Reader.GetString(3);
                     password = Reader.GetString(4);
 
                 }
