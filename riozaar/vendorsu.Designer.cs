@@ -29,6 +29,7 @@ namespace riozaar
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(vendorsu));
             this.signin = new Bunifu.Framework.UI.BunifuThinButton2();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,6 +58,16 @@ namespace riozaar
             this.bunifuCheckBox6 = new Bunifu.UI.WinForms.BunifuCheckBox();
             this.bunifuDropdown1 = new Bunifu.UI.WinForms.BunifuDropdown();
             this.bunifuCustomLabel3 = new Bunifu.Framework.UI.BunifuCustomLabel();
+            this.riozaarDataSet = new riozaar.riozaarDataSet();
+            this.locationBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.locationTableAdapter = new riozaar.riozaarDataSetTableAdapters.locationTableAdapter();
+            this.riozaarDataSet1 = new riozaar.riozaarDataSet1();
+            this.locationBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.locationTableAdapter1 = new riozaar.riozaarDataSet1TableAdapters.locationTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.riozaarDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.riozaarDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // signin
@@ -711,12 +722,15 @@ namespace riozaar
             this.bunifuDropdown1.BorderColor = System.Drawing.Color.Silver;
             this.bunifuDropdown1.BorderRadius = 1;
             this.bunifuDropdown1.Color = System.Drawing.Color.Silver;
+            this.bunifuDropdown1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.locationBindingSource1, "Address", true));
+            this.bunifuDropdown1.DataSource = this.locationBindingSource1;
             this.bunifuDropdown1.Direction = Bunifu.UI.WinForms.BunifuDropdown.Directions.Down;
             this.bunifuDropdown1.DisabledBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuDropdown1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
             this.bunifuDropdown1.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.bunifuDropdown1.DisabledForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.bunifuDropdown1.DisabledIndicatorColor = System.Drawing.Color.DarkGray;
+            this.bunifuDropdown1.DisplayMember = "Address";
             this.bunifuDropdown1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.bunifuDropdown1.DropdownBorderThickness = Bunifu.UI.WinForms.BunifuDropdown.BorderThickness.Thin;
             this.bunifuDropdown1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -744,6 +758,7 @@ namespace riozaar
             this.bunifuDropdown1.Name = "bunifuDropdown1";
             this.bunifuDropdown1.Size = new System.Drawing.Size(321, 32);
             this.bunifuDropdown1.TabIndex = 86;
+            this.bunifuDropdown1.Text = null;
             this.bunifuDropdown1.TextAlignment = Bunifu.UI.WinForms.BunifuDropdown.TextAlign.Left;
             this.bunifuDropdown1.TextLeftMargin = 5;
             // 
@@ -758,6 +773,34 @@ namespace riozaar
             this.bunifuCustomLabel3.Size = new System.Drawing.Size(79, 24);
             this.bunifuCustomLabel3.TabIndex = 87;
             this.bunifuCustomLabel3.Text = "Bazaar:";
+            // 
+            // riozaarDataSet
+            // 
+            this.riozaarDataSet.DataSetName = "riozaarDataSet";
+            this.riozaarDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // locationBindingSource
+            // 
+            this.locationBindingSource.DataMember = "location";
+            this.locationBindingSource.DataSource = this.riozaarDataSet;
+            // 
+            // locationTableAdapter
+            // 
+            this.locationTableAdapter.ClearBeforeFill = true;
+            // 
+            // riozaarDataSet1
+            // 
+            this.riozaarDataSet1.DataSetName = "riozaarDataSet1";
+            this.riozaarDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // locationBindingSource1
+            // 
+            this.locationBindingSource1.DataMember = "location";
+            this.locationBindingSource1.DataSource = this.riozaarDataSet1;
+            // 
+            // locationTableAdapter1
+            // 
+            this.locationTableAdapter1.ClearBeforeFill = true;
             // 
             // vendorsu
             // 
@@ -792,8 +835,12 @@ namespace riozaar
             this.Controls.Add(this.mobiletext);
             this.Controls.Add(this.nametext);
             this.Name = "vendorsu";
-            this.Size = new System.Drawing.Size(665, 465);
+            this.Size = new System.Drawing.Size(665, 469);
             this.Load += new System.EventHandler(this.vendorsu_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.riozaarDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.riozaarDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.locationBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -828,5 +875,11 @@ namespace riozaar
         private Bunifu.UI.WinForms.BunifuCheckBox bunifuCheckBox6;
         private Bunifu.UI.WinForms.BunifuDropdown bunifuDropdown1;
         private Bunifu.Framework.UI.BunifuCustomLabel bunifuCustomLabel3;
+        private System.Windows.Forms.BindingSource locationBindingSource;
+        private riozaarDataSet riozaarDataSet;
+        private riozaarDataSetTableAdapters.locationTableAdapter locationTableAdapter;
+        private System.Windows.Forms.BindingSource locationBindingSource1;
+        private riozaarDataSet1 riozaarDataSet1;
+        private riozaarDataSet1TableAdapters.locationTableAdapter locationTableAdapter1;
     }
 }

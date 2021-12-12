@@ -17,6 +17,7 @@ namespace riozaar
 
           //  bunifuDropdown1.Items.Add();
             InitializeComponent();
+           
         }
 
         private void bunifuDropdown1_SelectedIndexChanged(object sender, EventArgs e)
@@ -26,6 +27,7 @@ namespace riozaar
 
         private void signin_Click(object sender, EventArgs e)
         {
+            /*
             vendor v = new vendor();
             if (passtext.Text == conpasstext.Text)
             {
@@ -38,15 +40,40 @@ namespace riozaar
             {
                 MessageBox.Show("Passwords donot match");
 
-            }
+            }*/
+            MessageBox.Show(bunifuDropdown1.SelectedIndex.ToString());
         }
 
         private void vendorsu_Load(object sender, EventArgs e)
         {
+            //fillToolStrip.Hide();
+            //fillToolStripButton_Click(sender, e);
+
+            try
+            {
+                this.locationTableAdapter1.Fill(this.riozaarDataSet1.location);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
 
         }
         private void getbaazars()
         {
+
+        }
+
+        private void fillToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.locationTableAdapter1.Fill(this.riozaarDataSet1.location);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
 
         }
     }

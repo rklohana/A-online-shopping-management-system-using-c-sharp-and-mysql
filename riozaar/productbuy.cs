@@ -32,18 +32,12 @@ namespace riozaar
                 name.Text = value;
             }
         }
-        private string id;
-
-        public string Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        
 
 
         private string vendor;
         [Category("Customs props")]
-        public string Companytext
+        public string Vendor
         {
             get { return vendor; }
             set
@@ -53,9 +47,22 @@ namespace riozaar
             }
         }
 
+        private string pid;
+        [Category("Customs props")]
+        public string PID
+        {
+            get { return pid; }
+            set
+            {
+                pid = value;
+                
+            }
+        }
+
+
         private string description;
         [Category("Customs props")]
-        public string Capacity
+        public string Description
         {
             get { return description; }
             set

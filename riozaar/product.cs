@@ -30,10 +30,10 @@ namespace riozaar
         {
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "sql6.freesqldatabase.com",
-                Database = "sql6456591",
-                UserID = "sql6456591",
-                Password = "eVlfl8pexq",
+                Server = "localhost",
+                Database = "riozaar",
+                UserID = "root",
+                //Password = "eVlfl8pexq",
                 // SslMode = MySqlSslMode.Required,
             };
 
@@ -86,7 +86,7 @@ namespace riozaar
         public Image photoback(string i)
         {
             byte[] b = Convert.FromBase64String(i);
-            MemoryStream m = new System.IO.MemoryStream();
+            MemoryStream m = new MemoryStream();
             m.Write(b, 0, Convert.ToInt32(b.Length));
             Bitmap bm = new Bitmap(m, false);
             m.Dispose();
@@ -150,51 +150,72 @@ namespace riozaar
             try
             {
                 await conn.OpenAsync();
+               // conn.Open();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
             }
             int rowCount;
-            using (var command = conn.CreateCommand())
-            {   
-                command.CommandText = @"INSERT INTO PRODUCT (productID,Pname,Image,Description,price) VALUES (@productID, @Pname,@Image,@Description,@price);";
+            var command = conn.CreateCommand();
+            MySqlTransaction trans;
+            //trans = conn.BeginTransaction();
+            trans= await conn.BeginTransactionAsync();
+
+
+
+
+            //command.CommandText = "SAVEPOINT before_add";
+            //await command.ExecuteNonQueryAsync();
+            command.Connection = conn;
+            command.Transaction = trans;
+                command.CommandText = @"INSERT INTO PRODUCT (productID,Pname,Image,Description) VALUES (@productID, @Pname,@Image,@Description);";
                 command.Parameters.AddWithValue("@productID", id);
                 command.Parameters.AddWithValue("@Pname", name);
                 command.Parameters.AddWithValue("@Image", images);
                 command.Parameters.AddWithValue("@Description", description);
-                command.Parameters.AddWithValue("@price", price);
+           //rowCount= command.ExecuteNonQuery();
                 rowCount = await command.ExecuteNonQueryAsync();
                 if (rowCount > 0)
                 {
                     MessageBox.Show("Inserted");
                 }
-            }
-            using (var command = conn.CreateCommand())
-            {
-                command.CommandText = @"INSERT INTO sold_by (PRODUCT_productID,stock,VENDOR_VendorID) VALUES (@p,@s,@v);";
+            
+            //using (var command = conn.CreateCommand())
+            
+                command.CommandText = @"INSERT INTO sold_by (PRODUCT_productID,stock,VENDOR_VendorID,price) VALUES (@p,@s,@v,@price);";
                 command.Parameters.AddWithValue("@p", id);
                 command.Parameters.AddWithValue("@s", qt);
                 command.Parameters.AddWithValue("@v", vendorid);
+                command.Parameters.AddWithValue("@price", price);
                 try
                 {
+               // rowCount = command.ExecuteNonQuery();
                     rowCount = await command.ExecuteNonQueryAsync();
                     if (rowCount > 0)
-                    {
+                    { 
+                        await trans.CommitAsync();
                         MessageBox.Show("Inserted");
                     }
                 }
                 catch(Exception e)
                 {
                     MessageBox.Show(e.Message);
-                }
+              //  trans.Rollback();
+                 await trans.RollbackAsync();
+                //command.CommandText = "ROLLBACK TO before_add";
+                //await command.ExecuteNonQueryAsync();
+                    MessageBox.Show("Rolled back to save points");
+                    
+                
                 try
                 {
+                   // conn.Close();
                     await conn.CloseAsync();
                 }
-                catch (Exception e)
+                catch (Exception e1)
                 {
-                    MessageBox.Show(e.ToString());
+                    MessageBox.Show(e1.ToString());
                 }
             }
 

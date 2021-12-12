@@ -8,7 +8,7 @@ using MySqlConnector;
 using System.Data.SqlClient;
 namespace riozaar
 {
-    class vendor
+   public class vendor
     {
         string id;
         string name;
