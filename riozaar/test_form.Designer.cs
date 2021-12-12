@@ -29,31 +29,32 @@ namespace riozaar
         /// </summary>
         private void InitializeComponent()
         {
-            this.producttemplate1 = new riozaar.producttemplate();
+            this.signup11 = new riozaar.signup1();
             this.SuspendLayout();
             // 
-            // producttemplate1
+            // signup11
             // 
-            this.producttemplate1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.producttemplate1.Location = new System.Drawing.Point(97, 0);
-            this.producttemplate1.Name = "producttemplate1";
-            this.producttemplate1.Size = new System.Drawing.Size(644, 322);
-            this.producttemplate1.TabIndex = 0;
+            this.signup11.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.signup11.Location = new System.Drawing.Point(121, 18);
+            this.signup11.Name = "signup11";
+            this.signup11.Size = new System.Drawing.Size(620, 420);
+            this.signup11.TabIndex = 0;
             // 
             // test_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.producttemplate1);
+            this.Controls.Add(this.signup11);
             this.Name = "test_form";
             this.Text = "test_form";
+            this.Load += new System.EventHandler(this.test_form_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private producttemplate producttemplate1;
+        private signup1 signup11;
     }
 }

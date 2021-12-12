@@ -14,7 +14,7 @@ namespace riozaar
         string st;
         string ed;
         int shops;
-        List<string> location;
+        List<int> location;
         public bazaar()
         {
             connect();
@@ -34,12 +34,12 @@ namespace riozaar
             conn = new MySqlConnection(builder.ConnectionString);
 
         }
-        public void setdata(string did, string st_time, string ed_time, int n,List<string> locs)
+        public void setdata(string did, string st_time, string ed_time, int n,List<int> locs)
         {
             id = did;
             st = st_time;
             ed = ed_time;
-            location = new List<string>(locs);
+            location = new List<int>(locs);
             shops = n;
             
         }
@@ -59,7 +59,7 @@ namespace riozaar
         {
             return shops;
         }
-        public List<string> getlocation()
+        public List<int> getlocation()
         {
             return location;
         }

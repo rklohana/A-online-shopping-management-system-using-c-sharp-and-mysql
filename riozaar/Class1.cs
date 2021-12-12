@@ -18,6 +18,7 @@ namespace riozaar
         
         public customer()
         {
+            name = null;
             connect();
         }
         MySqlConnection conn;
@@ -64,7 +65,7 @@ namespace riozaar
         {
             return pass;
         }
-        public async void retrievedata(string em)
+        public async Task<bool> retrievedata(string em)
         {
             try
             {
@@ -73,15 +74,22 @@ namespace riozaar
             catch (Exception e)
             {
                 MessageBox.Show("cant reach server \n please check your internet connection and try again");
-                return;
+                return false;
             }
-            int row;
+            int row = 0; ;
             
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"select email,fname,phone,address from CUSTOMER where email=@email;";
+            command.CommandText = @"select * from CUSTOMER where email= @email;";
             command.Parameters.AddWithValue("@email", em);
-            row = await command.ExecuteNonQueryAsync();
+            try
+            {
+                row = await command.ExecuteNonQueryAsync();
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
             using (MySqlDataReader Reader = command.ExecuteReader())
             {
                 while (Reader.Read())
@@ -90,10 +98,23 @@ namespace riozaar
                     name = Reader.GetString(1);
                     phone = Reader.GetString(2);
                     address = Reader.GetString(3);
+                    pass = Reader.GetString(5);
+                    this.setdata(name, address, phone, email, pass);
                 }
                 
             }
-            MessageBox.Show("Data found!");
+           
+            if (name!=null)
+            {
+                
+                return true;
+            }
+            else
+            {   
+                
+                MessageBox.Show("not retrieved");
+                return false;            
+            }
         }
         public async void delete(string em)
         {
@@ -113,6 +134,7 @@ namespace riozaar
             command.Parameters.AddWithValue("@email", em);
             row = await command.ExecuteNonQueryAsync();
             MessageBox.Show("Data Deleted");
+            await conn.CloseAsync();
             
         }
         public async void add()

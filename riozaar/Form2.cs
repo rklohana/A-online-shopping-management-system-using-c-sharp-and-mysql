@@ -25,7 +25,7 @@ namespace riozaar
         private void button1_Click(object sender, EventArgs e)
         {
             customer c = new customer();
-            c.delete(textBox1.Text);
+           // c.delete(textBox1.Text);
 
         }
 

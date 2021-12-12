@@ -64,7 +64,7 @@ namespace riozaar
             return password;
         }
 
-        public async void retrievedata(string pid)
+        public async Task<bool> retrievedata(string pid)
         {
             try
             {
@@ -73,13 +73,13 @@ namespace riozaar
             catch (Exception e)
             {
                 MessageBox.Show("cant reach server \n please check your internet connection and try again");
-                return;
+                return false;
             }
             int row;
 
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"select DeliveryManID,DMName,DELIVERYMAN_DeliveryManID,password,Phone from DELIVERYMAN where DeliveryManID=@DeliveryManID;";
+            command.CommandText = @"select DeliveryManID,DMName,DELIVERYMAN_DeliveryManID,password,Phone from DELIVERYMAN where DeliveryManID=@DeliveryMan;";
             command.Parameters.AddWithValue("@DeliveryMan", id);
             row = await command.ExecuteNonQueryAsync();
             using (MySqlDataReader Reader = command.ExecuteReader())
@@ -95,7 +95,14 @@ namespace riozaar
 
 
             }
-            MessageBox.Show("Data found!");
+            if (id == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         public async void delete(string em)
         {
@@ -130,16 +137,24 @@ namespace riozaar
             int rowCount;
             using (var command = conn.CreateCommand())
             {
-                command.CommandText = @"INSERT INTO DELIVERYMAN (DeliveryManID,DMName,DELIVERYMAN_DeliveryManID,password,Phone) VALUES (@DeliveryManID,@DMName,@DELIVERYMAN_DeliveryManID,@password,@Phone);";
-                command.Parameters.AddWithValue("@DeliveryManID", id);
-                command.Parameters.AddWithValue("@DMName", name);
-                command.Parameters.AddWithValue("@DELIVERYMAN_DeliveryManID", managerId);
-                command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@Phone", phone);
-                rowCount = await command.ExecuteNonQueryAsync();
-                if (rowCount > 0)
+                try
                 {
-                    MessageBox.Show("Inserted");
+                    command.CommandText = @"INSERT INTO DELIVERYMAN  VALUES (@DeliveryManID,@DMName,@Phone,@DELIVERYMAN_DeliveryManID,@password,@loc);";
+                    command.Parameters.AddWithValue("@DeliveryManID", id);
+                    command.Parameters.AddWithValue("@DMName", name);
+                    command.Parameters.AddWithValue("@DELIVERYMAN_DeliveryManID", managerId);
+                    command.Parameters.AddWithValue("@password", password);
+                    command.Parameters.AddWithValue("@Phone", phone);
+                    command.Parameters.AddWithValue("@loc", 1);
+                    rowCount = await command.ExecuteNonQueryAsync();
+                    if (rowCount > 0)
+                    {
+                        MessageBox.Show("Inserted");
+                    }
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show(e.ToString());
                 }
             }
 

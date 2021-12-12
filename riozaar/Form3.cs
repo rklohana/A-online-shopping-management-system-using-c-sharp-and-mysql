@@ -17,10 +17,10 @@ namespace riozaar
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             customer c = new customer();
-            c.retrievedata(textBox1.Text);
+            await c.retrievedata(textBox1.Text);
             name.Text = c.getname();
             phone.Text = c.getphone();
             address.Text = c.getaddress();

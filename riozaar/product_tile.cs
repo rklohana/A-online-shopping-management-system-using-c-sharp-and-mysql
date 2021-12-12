@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace riozaar
 {
-    public partial class test_form : Form
+    public partial class product_tile : UserControl
     {
-        public test_form()
+        public product_tile()
         {
             InitializeComponent();
-        }
-
-        private async void test_form_Load(object sender, EventArgs e)
-        {
-            DeliveryMan d = new DeliveryMan();
-            await d.retrievedata("d2");
-            MessageBox.Show(d.getname());
         }
     }
 }

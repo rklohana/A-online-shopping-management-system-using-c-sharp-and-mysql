@@ -10,18 +10,17 @@ using System.Windows.Forms;
 
 namespace riozaar
 {
-    public partial class test_form : Form
+    public partial class addloc : UserControl
     {
-        public test_form()
+        public addloc()
         {
             InitializeComponent();
         }
 
-        private async void test_form_Load(object sender, EventArgs e)
+        private void bunifuButton21_Click(object sender, EventArgs e)
         {
-            DeliveryMan d = new DeliveryMan();
-            await d.retrievedata("d2");
-            MessageBox.Show(d.getname());
+            locations l = new locations();
+            l.add(bunifuTextBox1.Text);
         }
     }
 }

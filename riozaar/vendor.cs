@@ -16,9 +16,8 @@ namespace riozaar
         string password;
         string bazID;
         string[] days;
-        string location;
-        string[] start_time;
-        string[] end_time;
+       
+       
         
         MySqlConnection conn;
         void connect()
@@ -38,8 +37,7 @@ namespace riozaar
         public vendor()
         {
             days = new string[7];
-            start_time = new string[7];
-            end_time = new string[7];
+            
             connect();
         }
         public void setdata(string did, string n, string pho,string pass, string bID,string[] d ,string [] st,string[] et, string loc)
@@ -52,10 +50,9 @@ namespace riozaar
             for (int i=0;i<7;i++)
             {
                 days[i] = d[i];
-                start_time[i] = st[i];
-                end_time[i] = et[i];
+               
             }
-            location = loc;
+           
         }
         public string getname()
         {
@@ -69,22 +66,16 @@ namespace riozaar
         {
             return phone;
         }
+        public string getpass()
+        {
+            return password;
+        }
         public string[] getdays()
         {
             return days;
         }
-        public string[] getst()
-        {
-            return start_time;
-        }
-        public string[] getet()
-        {
-            return end_time;
-        }
-        public string getlocation()
-        {
-            return location;
-        }
+       
+       
         public string getbid()
         {
             return bazID;
@@ -105,7 +96,7 @@ namespace riozaar
             MySqlCommand command = conn.CreateCommand();
 
             command.CommandText = @"select VendorID,VFName,phone,BAZAAR_BazaarID,password from VENDOR where VendorID=@VendorID;";
-            command.Parameters.AddWithValue("@VendorID", id);
+            command.Parameters.AddWithValue("@VendorID", pid);
             row = await command.ExecuteNonQueryAsync();
             using (MySqlDataReader Reader = command.ExecuteReader())
             {

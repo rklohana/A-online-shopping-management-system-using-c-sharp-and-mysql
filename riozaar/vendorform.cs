@@ -10,18 +10,16 @@ using System.Windows.Forms;
 
 namespace riozaar
 {
-    public partial class test_form : Form
+    public partial class vendorform : Form
     {
-        public test_form()
+        public vendorform()
         {
             InitializeComponent();
         }
 
-        private async void test_form_Load(object sender, EventArgs e)
+        private void vendorform_Load(object sender, EventArgs e)
         {
-            DeliveryMan d = new DeliveryMan();
-            await d.retrievedata("d2");
-            MessageBox.Show(d.getname());
+
         }
     }
 }
