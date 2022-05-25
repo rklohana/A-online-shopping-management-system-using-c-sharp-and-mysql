@@ -22,10 +22,10 @@ namespace riozaar
         {
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "sql6.freesqldatabase.com",
-                Database = "sql6456591",
-                UserID = "sql6456591",
-                Password = "eVlfl8pexq",
+                Server = "localhost",
+                Database = "riozaar",
+                UserID = "root",
+                //Password = "eVlfl8pexq",
                 // SslMode = MySqlSslMode.Required,
             };
 
@@ -46,7 +46,7 @@ namespace riozaar
         {
             return address;
         }
-      
+        
         public async void add(string loc)
         {
             address = loc;
@@ -74,7 +74,64 @@ namespace riozaar
             await conn.CloseAsync();
 
         }
+        public async Task<bool> retrieveid(string n)
+        {
 
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                await conn.CloseAsync();
+                MessageBox.Show("cant reach server \n please check your internet connection and try again");
+                return false;
+            }
+            int row;
+
+            MySqlCommand command = conn.CreateCommand();
+
+            command.CommandText = @"select * from LOCATION where address=@i;";
+            command.Parameters.AddWithValue("@i", n);
+            row = await command.ExecuteNonQueryAsync();
+
+            try
+            {
+                MySqlDataReader Reader = command.ExecuteReader();
+                while (await Reader.ReadAsync())
+                {
+                    //locations l1 = new locations();
+                    id = Reader.GetInt32(0);
+                    address = Reader.GetString(1);
+
+
+
+
+
+                }
+                //  l2 = new List<locations>(l);
+
+
+            }
+            catch (Exception e)
+            {
+                await conn.CloseAsync();
+                return false;
+            }
+
+
+            if (id != -1)
+            {
+                await conn.CloseAsync();
+                return true;
+            }
+            else
+            {
+                await conn.CloseAsync();
+                return false;
+            }
+            //MessageBox.Show("Data found!");
+        }
         public async Task<bool> retrievedata(int n)
         {
            

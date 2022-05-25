@@ -40,15 +40,55 @@ namespace riozaar
             conn = new MySqlConnection(builder.ConnectionString);
 
         }
-        public void setdata(string pid,string n, string im, string des,string vid,float pr,int q)
+        public void setdata(string n, string im, string des,string vid,float pr,int q)
         {
-            id = pid;
+            // id = pid;
+            generateid();
             name = n;
             images = im;
             description = des;
             vendorid = vid;
             price = pr;
             qt = q;
+        }
+        public async void generateid()
+        {
+            int n;
+            string str = "p";
+            databseconnection dc = new databseconnection();
+            await dc.conn.OpenAsync();
+            MySqlCommand command = dc.conn.CreateCommand();
+            command.CommandText = "Select count(*) from PRODUCT;";
+            try
+            {
+                await command.ExecuteNonQueryAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("wrong query");
+                return;
+            }
+            MySqlDataReader reader;
+            try
+            {
+                reader = command.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("some error");
+                return;
+            }
+            while (reader.Read())
+            {
+                n = reader.GetInt32(0);
+                str += n.ToString();
+            }
+
+            await dc.conn.CloseAsync();
+            // MessageBox.Show(str);
+            id = str;
+
+
         }
         public string getname()
         {

@@ -25,23 +25,62 @@ namespace riozaar
         {
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "sql6.freesqldatabase.com",
-                Database = "sql6456591",
-                UserID = "sql6456591",
-                Password = "eVlfl8pexq",
+                Server = "localhost",
+                Database = "riozaar",
+                UserID = "root",
+                //Password = "eVlfl8pexq",
                 // SslMode = MySqlSslMode.Required,
             };
 
             conn = new MySqlConnection(builder.ConnectionString);
 
         }
-        public void setdata(string did, string n, string pho, string mid,string pass)
+        public void setdata(string n, string pho, string mid,string pass)
         {
-            id = did;
+            generateid();
             name = n;
             phone = pho;
             managerId = mid;
             password = pass;
+        }
+        public async void generateid()
+        {
+            int n;
+            string str = "dm";
+            databseconnection dc = new databseconnection();
+            await dc.conn.OpenAsync();
+            MySqlCommand command = dc.conn.CreateCommand();
+            command.CommandText = "Select count(*) from DELIVERYMAN;";
+            try
+            {
+                await command.ExecuteNonQueryAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("wrong query");
+                return;
+            }
+            MySqlDataReader reader;
+            try
+            {
+                reader = command.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("some error");
+                return;
+            }
+            while (reader.Read())
+            {
+                n = reader.GetInt32(0);
+                str += n.ToString();
+            }
+
+            await dc.conn.CloseAsync();
+            // MessageBox.Show(str);
+            id = str;
+
+
         }
         public string getname()
         {
@@ -159,10 +198,75 @@ namespace riozaar
             }
 
         }
-
-        public void update()
+        
+        public async void updatename(string ename)
         {
-
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            int rowCount;
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"UPDATE DELIVERYMAN DMName= @name;";
+                command.Parameters.AddWithValue("@name", ename);
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Updated");
+                }
+            }
         }
+
+        public async void updatephone(string pho)
+        {
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            int rowCount;
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"UPDATE DELIVERYMAN Phone= @phone;";
+                command.Parameters.AddWithValue("@phone", pho);
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Updated");
+                }
+            }
+        }
+        
+        public async void updatepass(string pass)
+        {
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            int rowCount;
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"UPDATE DELIVERYMAN password= @pass;";
+                command.Parameters.AddWithValue("@pass", pass);
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Updated");
+                }
+            }
+        }
+
     }
 }

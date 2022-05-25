@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace riozaar
 {
-    public partial class DMLOGIN : UserControl
+    public partial class adminlogin : UserControl
     {
-        public DMLOGIN()
+        public adminlogin()
         {
             InitializeComponent();
         }
 
         private async void signin_Click(object sender, EventArgs e)
         {
-            DeliveryMan d = new DeliveryMan();
+            admin d = new admin();
             await d.retrievedata(emailid.Text);
             if (d.getpass() == passwordtext.Text)
             {

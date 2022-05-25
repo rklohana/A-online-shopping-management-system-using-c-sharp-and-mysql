@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using MySqlConnector;
 namespace riozaar
 {
     public partial class productbuy : UserControl
@@ -116,8 +116,7 @@ namespace riozaar
         #endregion
 
 
-
-
+       
 
 
 
@@ -133,7 +132,7 @@ namespace riozaar
 
         private void productbuy_Load(object sender, EventArgs e)
         {
-
+            qnt.Maximum = Int32.Parse(Stock1);
         }
 
         private void qnt_KeyDown(object sender, KeyEventArgs e)
@@ -146,10 +145,14 @@ namespace riozaar
 
         private void qnt_KeyUp(object sender, KeyEventArgs e)
         {
-            if (qnt.Value > 1)
-            {
-                qnt.Value--;
-            }
+            
+                qnt.Value++;
+            
+        }
+
+        private void bunifuFlatButton1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

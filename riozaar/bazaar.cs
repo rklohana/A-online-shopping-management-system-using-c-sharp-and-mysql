@@ -7,14 +7,18 @@ using System.Windows.Forms;
 using MySqlConnector;
 using System.Data.SqlClient;
 namespace riozaar
-{
+{   struct host
+    {
+      public  int loc;
+       public string day;
+    }
     class bazaar
     {
         string id;
         string st;
         string ed;
         int shops;
-        List<int> location;
+        List<host> h;
         public bazaar()
         {
             connect();
@@ -24,24 +28,63 @@ namespace riozaar
         {
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "sql6.freesqldatabase.com",
-                Database = "sql6456591",
-                UserID = "sql6456591",
-                Password = "eVlfl8pexq",
+                Server = "localhost",
+                Database = "riozaar",
+                UserID = "root",
+                //Password = "eVlfl8pexq",
                 // SslMode = MySqlSslMode.Required,
             };
 
             conn = new MySqlConnection(builder.ConnectionString);
 
         }
-        public void setdata(string did, string st_time, string ed_time, int n,List<int> locs)
+        public void setdata( string st_time, string ed_time, List<host> l)
         {
-            id = did;
+            generateid();
             st = st_time;
             ed = ed_time;
-            location = new List<int>(locs);
-            shops = n;
+            h = new List<host>(l);
+            //shops = n;0
             
+        }
+        public async void generateid()
+        {
+            int n;
+            string str = "b";
+            databseconnection dc = new databseconnection();
+            await dc.conn.OpenAsync();
+            MySqlCommand command = dc.conn.CreateCommand();
+            command.CommandText = "Select count(*) from BAZAAR;";
+            try
+            {
+                await command.ExecuteNonQueryAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("wrong query");
+                return;
+            }
+            MySqlDataReader reader;
+            try
+            {
+                reader = command.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("some error");
+                return;
+            }
+            while (reader.Read())
+            {
+                n = reader.GetInt32(0);
+                str += n.ToString();
+            }
+
+            await dc.conn.CloseAsync();
+            // MessageBox.Show(str);
+            id = str;
+
+
         }
         public string getst()
         {
@@ -59,9 +102,9 @@ namespace riozaar
         {
             return shops;
         }
-        public List<int> getlocation()
+        public List<host> getlocation()
         {
-            return location;
+            return h;
         }
 
         public async void retrievedata(string pid)
@@ -142,10 +185,117 @@ namespace riozaar
             }
 
         }
-
+     0
         public void update()
         {
 
         }
+        public async void addwhole()
+        {
+
+            {
+                databseconnection dc = new databseconnection();
+                try
+                {
+                    await dc.conn.OpenAsync();
+                    // conn.Open();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+                int rowCount=0;
+                var command = dc.conn.CreateCommand();
+                MySqlTransaction trans;
+                //trans = conn.BeginTransaction();
+                trans = await dc.conn.BeginTransactionAsync();
+
+                // DateTime.ParseExact(st, "HH:mm:ss",InvariantCulture);
+
+                //Convert.ToDateTime(st);
+
+                //command.CommandText = "SAVEPOINT before_add";
+                //await command.ExecuteNonQueryAsync();
+                TimeSpan st1 = TimeSpan.Parse(st);
+                TimeSpan ed1 = TimeSpan.Parse(ed);
+                command.Connection = dc.conn;
+                command.Transaction = trans;
+                command.CommandText = @"INSERT INTO BAZAAR (BAZAARID,START_TIME,END_TIME) VALUES (@id, @st,@et);";
+                command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@st",st1 );
+                command.Parameters.AddWithValue("@et", ed1);
+
+                //rowCount= command.ExecuteNonQuery();
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Inserted");
+                }
+                //  await dc.conn.CloseAsync();
+                //using (var command = conn.CreateCommand())
+
+
+                int i1 = 0;
+                foreach(var i in h)
+                {
+                   // await dc.conn.OpenAsync();
+                    //using (var command1= conn.CreateCommand()) {
+                    //    command1.Connection = dc.conn;
+                    //    command1.Transaction = trans;
+
+                        command.CommandText = @"INSERT INTO host VALUES (@p"+i1.ToString()+ ",@s" + i1.ToString() + ",@v" + i1.ToString() + ");";
+                        command.Parameters.AddWithValue("@p"+i1.ToString(), i.loc);
+
+                    
+                        command.Parameters.AddWithValue("@s"+i1.ToString(), id); 
+                        command.Parameters.AddWithValue("@v"+i1.ToString(), i.day);
+
+                    i1++;
+                        try
+                        {
+                            // rowCount = command.ExecuteNonQuery();
+                            rowCount += await command.ExecuteNonQueryAsync();
+                            //await dc.conn.CloseAsync();
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.Message);
+                            //  trans.Rollback();
+                            await trans.RollbackAsync();
+                            //command.CommandText = "ROLLBACK TO before_add";
+                            //await command.ExecuteNonQueryAsync();
+                            MessageBox.Show("Rolled back to save points");
+                            rowCount = 0;
+                            await dc.conn.CloseAsync();
+                            break;
+                            //  await conn.CloseAsync();
+
+                        }
+
+                   // }
+                    
+
+                }
+                
+                try
+                {
+                    if (rowCount > 0)
+                    {
+                        await trans.CommitAsync();
+                        MessageBox.Show("Inserted");
+                    }
+                    // conn.Close();
+                    await dc.conn.CloseAsync();
+                }0
+                catch (Exception e1)
+                {
+                   // await conn.CloseAsync();
+                    MessageBox.Show(e1.ToString());
+                }
+
+            }
+        }
     }
-}
+    }
+
+

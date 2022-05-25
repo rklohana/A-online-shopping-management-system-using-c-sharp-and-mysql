@@ -120,46 +120,16 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="signin.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAALAAAAApCAYAAACV3qPVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAG3SURBVHhe7dy9SgNREMXxFBYWFhaWFhYWFhbiA4iViA8g
-        ghYKFmKliPFbfPP1nMmSbOJYau7AX/jB7uwmNofl3pudO9JfBxSWFoEq0iJQRVoEqkiLQBVpEagiLYYV
-        2ZVzuZGxfAF/zDlz3i5lT1Yly2cvLXbb8iQvkv0T4D+8yrPsS5ZTmS847WfiD2VfCCyDH6TXsiYLmZ2d
-        OLz38iHZlwDL5nyuyyC3sxM/eQkvWufx8SC3kwOPeRk2oII3OZRpgL3a4AlbdjPQIud1QyLAXqrwbC+7
-        EWjRpxxLBNjrbdlNQMvuJAL8MCgCVfgpHAF+HxSBSiLA2QWgAgKM0ggwSiPAKI0AozQCjNIIMEojwCgt
-        AuxfNLKLQOsiwPS6oaoIsFs1sotAy/wOTwT4QHgfAtWcSgTYPUZ0Y6ASN3nuSATYjoSX2lGB+zYvpM/u
-        5MBtRbeSfQBoyaMMNjuZHkSPESsSaJl74bZkkNu5k25T3HvPpA4t8bDBT96F8NqPQgwnToSJHVrgCduV
-        /LJHWloMTruXKtgfDcvgUYA3lvQGk1k+e2kRqCItAlWkRaCKtAhUkRaBAkbdN6dAI/9U6Bf+AAAAAElF
-        TkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAASQAAAApCAYAAACcEFSGAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHbSURBVHhe7d09axRRFAbgFBYWFhaWFhYWFinEHyBWIv4A
+        EWKhYCFWihi/xX++vudmSTbxWIRk507xLDwwc+Zju5eZOzPnHuS3AViJtggwQ1sEmKEtAszQFgFmaIsA
+        M7TF4UYcxlG8i+P4A3AJlRuVH6/jYdyMLm+22uLmfnyJb9H9CcBlfY+v8Si63InzhUqvl1EHdScEuKq6
+        0Hkbt+JCBp2tVBh9jF/RnQTgOlXe3I6dHDpbqSsjYQQsqcaXdnLoZKHGjNymAUv7EU/iNJDqaVoNYHc7
+        A+xb5c+dGIFUj+Jq9LvbEWDffsezGIFU7wd0OwEs5UOMQPq0UwSYoa6SRiD93CkCzDICqdsAsDSBBKyG
+        QAJWQyABqyGQgNUQSMBqCCRgNQQSsBojkOoNyW4jwJJGIOmVDazBCKRqJdltBFhKfVM7Aulx+J4NmOlF
+        jECqnra6RQKzVNP/BzECqTwNTdqApVUf/1exzaKThWpj+z66AwD25XPsTB55ujB62nriBiylemnfi50c
+        OreyuRs1V5JBbmBf6jatrowuhFH5pzBu356HgW7gutUA9pv4zxz/bXGo9KpHceb3B66q7rqO4jC6vNlq
+        iwAztEWAGdoiwAxtEWCGtgiwsIPNX4qpcuJMnwXFAAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="locationBindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>628, 17</value>
-  </metadata>
-  <metadata name="riozaarDataSet1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>490, 17</value>
-  </metadata>
-  <metadata name="bazaarBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>155, 56</value>
-  </metadata>
-  <metadata name="riozaarDataSet2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
-  </metadata>
-  <metadata name="riozaarDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="locationBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>148, 17</value>
-  </metadata>
-  <metadata name="locationTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>322, 17</value>
-  </metadata>
-  <metadata name="locationTableAdapter1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>809, 17</value>
-  </metadata>
-  <metadata name="bazaarTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>321, 56</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
-  </metadata>
 </root>

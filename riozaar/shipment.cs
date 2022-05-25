@@ -8,25 +8,26 @@ using MySqlConnector;
 using System.Data.SqlClient;
 namespace riozaar
 {
-    /*
+    
     class shipment
     {
-        string id;
+        string sdate;
         string orderId;
         string DMid;
         string status;
         string paymentstatus;
         string location;
+      
 
         MySqlConnection conn;
         void connect()
         {
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "sql6.freesqldatabase.com",
-                Database = "sql6456591",
-                UserID = "sql6456591",
-                Password = "eVlfl8pexq",
+                Server = "localhost",
+                Database = "riozaar",
+                UserID = "root",
+                //Password = "eVlfl8pexq",
                 // SslMode = MySqlSslMode.Required,
             };
 
@@ -37,22 +38,23 @@ namespace riozaar
         {
             connect();
         }
-        public void setdata(string did, string oid, string dmid, string st, string pst,string loc)
+        public void setdata(string sd, string oid, string dmid, string st, string pst,string loc)
         {
-            id = did;
+            sdate = sd;
             orderId = oid;
             DMid = dmid;
             status= st;
             paymentstatus = pst;
             location = loc;
+            
         }
         public string getoid()
         {
             return orderId;
         }
-        public string getdid()
+        public string getsd()
         {
-            return id;
+            return sdate;
         }
         public string getdmid()
         {
@@ -85,19 +87,19 @@ namespace riozaar
 
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"select VendorID,VFName,phone,BAZAAR_BazaarID,password from VENDOR where VendorID=@VendorID;";
-            command.Parameters.AddWithValue("@VendorID", id);
+            command.CommandText = @"select sdate,shipmentStatus,paymentStatus,DELIVERYMAN_DeliveryManID,ORDERS_orderID from SHIPMENT where ORDERS_orderID=@ORDERS_orderID;";
+            command.Parameters.AddWithValue("@ORDERS_orderID", orderId);
             row = await command.ExecuteNonQueryAsync();
             using (MySqlDataReader Reader = command.ExecuteReader())
             {
                 while (Reader.Read())
                 {
-                    id = Reader.GetString(0);
-                    name = Reader.GetString(1);
-                    phone = Reader.GetString(2);
-                    bazID = Reader.GetString(3);
-                    password = Reader.GetString(4);
-
+                    sdate= Reader.GetString(0);
+                    orderId = Reader.GetString(1);
+                    DMid = Reader.GetString(2);
+                    status = Reader.GetString(3);
+                    paymentstatus = Reader.GetString(4);
+                    
                 }
 
 
@@ -118,8 +120,8 @@ namespace riozaar
             //conn.Open();
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"delete from VENDOR where VendorID=@VendorID;";
-            command.Parameters.AddWithValue("@VendorID", em);
+            command.CommandText = @"delete from SHIPMENT where ORDERS_orderID=@ORDERS_orderID;";
+            command.Parameters.AddWithValue("@ORDERS_orderID", em);
             row = await command.ExecuteNonQueryAsync();
             MessageBox.Show("Data Deleted");
 
@@ -137,12 +139,12 @@ namespace riozaar
             int rowCount;
             using (var command = conn.CreateCommand())
             {
-                command.CommandText = @"INSERT INTO VENDOR (VendorID,VFName,phone,BAZAAR_BazaarID,password) VALUES (@VendorID,@VFName,@phone,@BAZAAR_BazaarID,@password);";
-                command.Parameters.AddWithValue("@VendorID", id);
-                command.Parameters.AddWithValue("@VFName", name);
-                command.Parameters.AddWithValue("@phone", phone);
-                command.Parameters.AddWithValue("@BAZAAR_BazaarID", bazID);
-                command.Parameters.AddWithValue("@password", password);
+                command.CommandText = @"INSERT INTO SHIPMENT(sdate,shipmentStatus,paymentStatus,DELIVERYMAN_DeliveryManID,ORDERS_orderID) VALUES (sdate,shipmentStatus,paymentStatus,DELIVERYMAN_DeliveryManID,ORDERS_orderID);";
+                command.Parameters.AddWithValue("@ORDERS_orderID", orderId);
+                command.Parameters.AddWithValue("@sdate", sdate);
+                command.Parameters.AddWithValue("@shipmentStatus", status);
+                command.Parameters.AddWithValue("@paymentStatus", paymentstatus);
+                command.Parameters.AddWithValue("@DELIVERYMAN_DeliveryManID", DMid);
                 rowCount = await command.ExecuteNonQueryAsync();
                 if (rowCount > 0)
                 {
@@ -157,5 +159,5 @@ namespace riozaar
 
         }
     }
-    */
+    
 }

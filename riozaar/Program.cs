@@ -16,7 +16,7 @@ namespace riozaar
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new test_form());
+            Application.Run(new vendorform(null));
         }
     }
 }

@@ -26,11 +26,11 @@ namespace riozaar
         {   
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "sql6.freesqldatabase.com",
-                Database = "sql6456591",
-                UserID = "sql6456591",
-                Password = "eVlfl8pexq",
-               // SslMode = MySqlSslMode.Required,
+                Server = "localhost",
+                Database = "riozaar",
+                UserID = "root",
+                //Password = "eVlfl8pexq",
+                // SslMode = MySqlSslMode.Required,
             };
 
             conn = new MySqlConnection(builder.ConnectionString);
@@ -165,9 +165,93 @@ namespace riozaar
             
         }
 
-        public void update()
+        public async void updatename(string ename)
         {
-
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            int rowCount;
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"UPDATE CUSTOMER fName= @name;";
+                command.Parameters.AddWithValue("@name", ename);
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Updated");
+                }
+            }
+        }
+        public async void updatephone(string pho)
+        {
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            int rowCount;
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"UPDATE CUSTOMER Phone= @phone;";
+                command.Parameters.AddWithValue("@phone", pho);
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Updated");
+                }
+            }
+        }
+        public async void updateaddr(string addr)
+        {
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            int rowCount;
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"UPDATE CUSTOMER Address= @addr;";
+                command.Parameters.AddWithValue("@addr", addr);
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Updated");
+                }
+            }
+        }
+        public async void updatepass(string pass)
+        {
+            try
+            {
+                await conn.OpenAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+            int rowCount;
+            using (var command = conn.CreateCommand())
+            {
+                command.CommandText = @"UPDATE CUSTOMER password= @pass;";
+                command.Parameters.AddWithValue("@pass", pass);
+                rowCount = await command.ExecuteNonQueryAsync();
+                if (rowCount > 0)
+                {
+                    MessageBox.Show("Updated");
+                }
+            }
         }
     }
 

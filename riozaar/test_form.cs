@@ -19,12 +19,20 @@ namespace riozaar
 
         private async void test_form_Load(object sender, EventArgs e)
         {
-          /*  DeliveryMan d = new DeliveryMan();
-            await d.retrievedata("d2");
-            MessageBox.Show(d.getname()); */
+            /*  DeliveryMan d = new DeliveryMan();
+              await d.retrievedata("d2");
+              MessageBox.Show(d.getname()); */
+          //  bazaar b = new bazaar();
+           // b.generateid();
+           
         }
 
         private void producttemplate1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vendorhomepage1_Load(object sender, EventArgs e)
         {
 
         }

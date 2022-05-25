@@ -137,6 +137,9 @@
       <HintPath>..\packages\Bunifu.UI.WinForms.5.3.0\lib\net40\Bunifu.UI.WinForms.Deprecated.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604" />
+    <Reference Include="Guna.UI2, Version=2.0.2.5, Culture=neutral, PublicKeyToken=e4b9cdd7b4cde4b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.2.5\lib\net40\Guna.UI2.dll</HintPath>
+    </Reference>
     <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d" />
     <Reference Include="MySql.Data, Version=8.0.27.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="MySqlConnector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
@@ -187,8 +190,32 @@
       <DependentUpon>addloc.cs</DependentUpon>
     </Compile>
     <Compile Include="admin.cs" />
+    <Compile Include="adminadd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="adminadd.Designer.cs">
+      <DependentUpon>adminadd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="adminlogin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="adminlogin.Designer.cs">
+      <DependentUpon>adminlogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="bazaar.cs" />
+    <Compile Include="bazaaradd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="bazaaradd.Designer.cs">
+      <DependentUpon>bazaaradd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="customerform.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="customerform.Designer.cs">
+      <DependentUpon>customerform.cs</DependentUpon>
+    </Compile>
     <Compile Include="databseconnection.cs" />
     <Compile Include="DeliveryMan.cs" />
     <Compile Include="DMLOGIN.cs">
@@ -223,6 +250,12 @@
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
     <Compile Include="order.cs" />
+    <Compile Include="ordertemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ordertemplate.Designer.cs">
+      <DependentUpon>ordertemplate.cs</DependentUpon>
+    </Compile>
     <Compile Include="product.cs" />
     <Compile Include="productbuy.cs">
       <SubType>UserControl</SubType>
@@ -254,6 +287,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>riozaarDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="riozaarDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>riozaarDataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="shipment.cs" />
     <Compile Include="signup.cs">
       <SubType>UserControl</SubType>
@@ -280,6 +318,12 @@
     <Compile Include="vendorform.Designer.cs">
       <DependentUpon>vendorform.cs</DependentUpon>
     </Compile>
+    <Compile Include="vendorhomepage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="vendorhomepage.Designer.cs">
+      <DependentUpon>vendorhomepage.cs</DependentUpon>
+    </Compile>
     <Compile Include="vendorlogin.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -292,8 +336,26 @@
     <Compile Include="vendorsu.Designer.cs">
       <DependentUpon>vendorsu.cs</DependentUpon>
     </Compile>
+    <Compile Include="vendortemplate.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="vendortemplate.Designer.cs">
+      <DependentUpon>vendortemplate.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="addloc.resx">
       <DependentUpon>addloc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="adminadd.resx">
+      <DependentUpon>adminadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="adminlogin.resx">
+      <DependentUpon>adminlogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="bazaaradd.resx">
+      <DependentUpon>bazaaradd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customerform.resx">
+      <DependentUpon>customerform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DMLOGIN.resx">
       <DependentUpon>DMLOGIN.cs</DependentUpon>
@@ -309,6 +371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="login.resx">
       <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ordertemplate.resx">
+      <DependentUpon>ordertemplate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="productbuy.resx">
       <DependentUpon>productbuy.cs</DependentUpon>
@@ -341,11 +406,17 @@
     <EmbeddedResource Include="vendorform.resx">
       <DependentUpon>vendorform.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="vendorhomepage.resx">
+      <DependentUpon>vendorhomepage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="vendorlogin.resx">
       <DependentUpon>vendorlogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="vendorsu.resx">
       <DependentUpon>vendorsu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="vendortemplate.resx">
+      <DependentUpon>vendortemplate.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -378,6 +449,17 @@
     </None>
     <None Include="riozaarDataSet1.xss">
       <DependentUpon>riozaarDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="riozaarDataSet2.xsc">
+      <DependentUpon>riozaarDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="riozaarDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>riozaarDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="riozaarDataSet2.xss">
+      <DependentUpon>riozaarDataSet2.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

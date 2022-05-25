@@ -29,24 +29,13 @@ namespace riozaar
         /// </summary>
         private void InitializeComponent()
         {
-            this.producttemplate1 = new riozaar.producttemplate();
             this.SuspendLayout();
-            // 
-            // producttemplate1
-            // 
-            this.producttemplate1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.producttemplate1.Location = new System.Drawing.Point(93, 12);
-            this.producttemplate1.Name = "producttemplate1";
-            this.producttemplate1.Size = new System.Drawing.Size(644, 322);
-            this.producttemplate1.TabIndex = 0;
-            this.producttemplate1.Load += new System.EventHandler(this.producttemplate1_Load);
             // 
             // test_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.producttemplate1);
             this.Name = "test_form";
             this.Text = "test_form";
             this.Load += new System.EventHandler(this.test_form_Load);
@@ -54,8 +43,7 @@ namespace riozaar
 
         }
 
-        #endregion
 
-        private producttemplate producttemplate1;
+        #endregion
     }
 }

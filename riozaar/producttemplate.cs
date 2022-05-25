@@ -37,7 +37,7 @@ namespace riozaar
         private void bunifuThinButton21_Click(object sender, EventArgs e)
         {
             product p = new product();
-            p.setdata("2", textBox1.Text, p.photoconvert(b), textBox2.Text,"456", float.Parse(textBox5.Text),decimal.ToInt32( numericUpDown1.Value));
+            p.setdata("2", textBox1.Text, p.photoconvert(b), textBox2.Text, float.Parse(textBox5.Text),decimal.ToInt32( numericUpDown1.Value));
             p.add();
             Console.WriteLine(float.Parse(textBox5.Text)+" \n");
         }

@@ -51,7 +51,8 @@ namespace riozaar
 
             try
             {
-                this.locationTableAdapter1.Fill(this.riozaarDataSet1.location);
+                this.bazaarTableAdapter.Fill(this.riozaarDataSet2.bazaar);
+               // this.locationTableAdapter1.Fill(this.riozaarDataSet1.location);
             }
             catch (System.Exception ex)
             {

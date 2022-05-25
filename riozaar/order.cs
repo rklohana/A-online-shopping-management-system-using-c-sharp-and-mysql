@@ -7,10 +7,10 @@ using System.Windows.Forms;
 using MySqlConnector;
 using System.Data.SqlClient;
 namespace riozaar
-{ /*
+{ 
     struct det{
-        string pid;
-        string vid;
+       public string pid;
+       public string vid;
     }
 
     class order
@@ -19,7 +19,6 @@ namespace riozaar
         string orddate;
         float totalamount;
         string custId;
-        string vid;
         List<det> d;
         string location;
         MySqlConnection conn;
@@ -27,11 +26,11 @@ namespace riozaar
         {
             var builder = new MySqlConnectionStringBuilder
             {
-                Server = "sql6.freesqldatabase.com",
-                Database = "sql6456591",
-                UserID = "sql6456591",
+               Server = "localhost",
+                Database = "riozaar",
+                UserID = "root",
                 Password = "eVlfl8pexq",
-                // SslMode = MySqlSslMode.Required,
+                 SslMode = MySqlSslMode.Required,
             };
 
             conn = new MySqlConnection(builder.ConnectionString);
@@ -41,39 +40,81 @@ namespace riozaar
         {
             connect();
         }
-        public void setdata(string did, string n, string pho, string cid,string v, List<string> p,string loc)
+        public void setdata(string n, float ta, string cid, List<det> p,string loc)
         {
-            id = did;
-            name = n;
-            phone = pho;
+            generateid();
+            orddate = n;
+            totalamount = ta;
             custId = cid;
-            vid = v;
             location = loc;
-            pid = new List<string>(p);
+            d = new List<det>(p);
+           
         }
-        public string getname()
+
+       
+
+
+        public async void generateid()
         {
-            return name;
+            int n;
+            string str = "o";
+            databseconnection dc = new databseconnection();
+            await dc.conn.OpenAsync();
+            MySqlCommand command = dc.conn.CreateCommand();
+            command.CommandText = "Select count(*) from orders;";
+            try
+            {
+                await command.ExecuteNonQueryAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("wrong query");
+                return;
+            }
+            MySqlDataReader reader;
+            try
+            {
+                reader = command.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("some error");
+                return;
+            }
+            while (reader.Read())
+            {
+                n = reader.GetInt32(0);
+                str += n.ToString();
+            }
+
+            await dc.conn.CloseAsync();
+             MessageBox.Show(str);
+            id = str;
+
+
+        }
+
+
+
+        public string getorddate()
+        {
+            return orddate;
         }
         public string getdid()
         {
             return id;
         }
-        public string getphone()
+        public float gettotalamount()
         {
-            return phone;
+            return totalamount;
         }
         public string getcustid()
         {
             return custId;
         }
-        public string getvid()
+        public List<det> getpid()
         {
-            return vid;
-        }
-        public List<string> getpid()
-        {
-            return pid;
+            return d;
         }
         public string getlocation()
         {
@@ -102,10 +143,10 @@ namespace riozaar
                 while (Reader.Read())
                 {
                     id = Reader.GetString(0);
-                    name = Reader.GetString(1);
-                    phone = Reader.GetString(2);
-                     //= Reader.GetString(3);
-                    password = Reader.GetString(4);
+                    orddate = Reader.GetString(1);
+                    totalamount= Reader.GetFloat(2);
+                    custId= Reader.GetString(3);
+                    
 
                 }
 
@@ -124,11 +165,11 @@ namespace riozaar
                 MessageBox.Show(e.ToString());
             }
             int row;
-            //conn.Open();
+            conn.Open();
             MySqlCommand command = conn.CreateCommand();
 
-            command.CommandText = @"delete from VENDOR where VendorID=@VendorID;";
-            command.Parameters.AddWithValue("@VendorID", em);
+            command.CommandText = @"delete from ORDERS where orderID=@orderID;";
+            command.Parameters.AddWithValue("@orderID", em);
             row = await command.ExecuteNonQueryAsync();
             MessageBox.Show("Data Deleted");
 
@@ -146,12 +187,11 @@ namespace riozaar
             int rowCount;
             using (var command = conn.CreateCommand())
             {
-                command.CommandText = @"INSERT INTO VENDOR (VendorID,VFName,phone,BAZAAR_BazaarID,password) VALUES (@VendorID,@VFName,@phone,@BAZAAR_BazaarID,@password);";
-                command.Parameters.AddWithValue("@VendorID", id);
-                command.Parameters.AddWithValue("@VFName", name);
-                command.Parameters.AddWithValue("@phone", phone);
-                command.Parameters.AddWithValue("@BAZAAR_BazaarID", bazID);
-                command.Parameters.AddWithValue("@password", password);
+                command.CommandText = @"INSERT INTO ORDERS (orderID,ODate,CUSTOMER_email,totalAmount) VALUES (@orderID,@ODate,@CUSTOMER_email,@totalAmount);";
+                command.Parameters.AddWithValue("@orderID", id);
+                command.Parameters.AddWithValue("@ODate", orddate);
+                command.Parameters.AddWithValue("@CUSTOMER_email", custId);
+                command.Parameters.AddWithValue("@totalAmount", totalamount);
                 rowCount = await command.ExecuteNonQueryAsync();
                 if (rowCount > 0)
                 {
@@ -167,5 +207,6 @@ namespace riozaar
         }
 
     }
-    */
+    
+
 }
